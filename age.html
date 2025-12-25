@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Age</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<div id="age"></div>
+
+<script>
+  const birthDate = new Date("2000-02-25");
+
+  function updateAge() {
+    const now = new Date();
+    let years = now.getFullYear() - birthDate.getFullYear();
+    let months = now.getMonth() - birthDate.getMonth();
+    let days = now.getDate() - birthDate.getDate();
+
+    if (days < 0) {
+      months--;
+      const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += lastMonth.getDate();
+    }
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    document.getElementById("age").innerText =
+      `${years} years ${months} months ${days} days`;
+  }
+
+  updateAge();
+  setInterval(updateAge, 1000 * 60 * 60); // update hourly
+</script>
+
+</body>
+</html>
